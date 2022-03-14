@@ -4,12 +4,11 @@
             <div v-if="error != undefined">
                 <p>{{error}}</p>
             </div>
-            <h2>Student Register</h2>
-            <hr>
-            <v-text-field v-model="ra" label="RA" clearable ></v-text-field>
+            <h2>Student Register</h2><br>
+            <v-text-field v-model="ra" label="RA" hint="12334554" clearable ></v-text-field>
             <v-text-field v-model="name" label="Student Name" clearable ></v-text-field>
-            <v-text-field v-model="email" label="Student Email" clearable ></v-text-field>
-            <v-text-field v-model="cpf" label="Student CPF" clearable></v-text-field>
+            <v-text-field v-model="email" label="Student Email" hint="email@email.com" clearable ></v-text-field>
+            <v-text-field v-model="cpf" label="Student CPF" hint="000.000.000-00" clearable></v-text-field><br>
             <v-btn color='secondary' small @click="register">Create Student</v-btn> |
             <router-link :to="{name: 'User'}"><v-btn color="secondary" small>Cancel</v-btn></router-link>
         </v-container>
