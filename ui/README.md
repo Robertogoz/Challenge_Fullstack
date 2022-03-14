@@ -1,4 +1,4 @@
-# ui
+# Challenge_Fullstack_ui
 
 ## Project setup
 ```
