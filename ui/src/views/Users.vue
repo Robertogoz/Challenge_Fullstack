@@ -24,7 +24,7 @@
                                 <router-link :to="{name: 'Edit', params: {id: student.ra}}"><v-btn color="warning" small>Edit</v-btn></router-link> |
                                 <v-dialog v-model="dialog" max-width="290">
                                     <template v-slot:activator="{ on, attrs }">
-                                        <v-btn color="error" small v-bind="attrs" v-on="on">Delete</v-btn>
+                                        <v-btn color="error" small v-bind="attrs" @click='saveRA(student.ra)' v-on="on">Delete</v-btn>
                                     </template>
                                 <v-card>
                                     <v-card-title class="text-h5">
@@ -33,19 +33,11 @@
                                     <v-card-text>Are you sure that you want to delete this Student?</v-card-text>
                                     <v-card-actions>
                                     <v-spacer></v-spacer>
-                                    <v-btn
-                                        color="secondary"
-                                        text
-                                        @click="dialog = false"
-                                    >
-                                        No
+                                    <v-btn color="secondary" text @click="dialog = false">
+                                        Cancel
                                     </v-btn>
-                                    <v-btn
-                                        color="secondary"
-                                        text
-                                        @click="deleteUser(student.ra)"
-                                    >
-                                        Yes
+                                    <v-btn color="secondary" text @click="deleteUser()">
+                                        Yes, Delete it
                                     </v-btn>
                                     </v-card-actions>
                                 </v-card>
@@ -76,10 +68,10 @@ export default {
             search: '',
             dialog: false,
             headers: [
-                {text: 'RA',value: 'ra'},
+                { text: 'RA',value: 'ra' },
                 { text: 'Name', value: 'name' },
                 { text: 'Email', value: 'email' },
-                { text: 'CFP', value: 'cpf' },
+                { text: 'CPF', value: 'cpf' },
                 { text: 'actions', value: 'actions' }
             ],
             students:[],
@@ -87,9 +79,7 @@ export default {
         }
     },
     methods: {
-        deleteUser(ra) {
-            this.deleteUserId = ra;
-
+        deleteUser() {
             axios.delete('https://localhost:7082/api/Students/'+this.deleteUserId).then(res => {
                 console.log(res);
                 this.students = this.students.filter(s => s.ra != this.deleteUserId);
@@ -97,6 +87,9 @@ export default {
             }).catch(err => {
                 console.log(err);
             })
+        },
+        saveRA(ra) {
+            this.deleteUserId = ra;
         }
     }
 }
