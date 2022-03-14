@@ -57,6 +57,15 @@ namespace API.Controllers
 
             try
             {
+                if (student.Email is "" or null)
+                {
+                    return BadRequest();
+                }
+                if (student.Name is "" or null)
+                {
+                    return BadRequest();
+                }
+
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
