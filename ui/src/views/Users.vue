@@ -1,32 +1,34 @@
 <template>
     <div>
-        <h2>Students List</h2>
-        <router-link :to="{name: 'Register'}"><v-btn color="secondary" small>Create Student</v-btn></router-link>
-        <v-simple-table>
-            <template v-slot:default>
-                <thead>
-                    <tr >
-                        <th class="text-left">RA(Registro do Aluno)</th>
-                        <th class="text-left">Name</th>
-                        <th class="text-left">Email</th>
-                        <th class="text-left">CPF</th>
-                        <th class="text-left">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="student in students" :key="student.ra">
-                        <td>{{student.ra}}</td>
-                        <td>{{student.name}}</td>
-                        <td>{{student.email }}</td>
-                        <td>{{student.cpf}}</td>
-                        <td>
-                            <router-link :to="{name: 'Edit', params: {id: student.ra}}"><v-btn color="warning" small>Edit</v-btn></router-link> 
-                            <v-btn color="error" small @click="deleteUser(student.ra)">Delete</v-btn>
-                        </td>
-                    </tr>
-                </tbody>
-            </template>
-        </v-simple-table>
+        <v-container fluid>
+            <h2>Students List</h2>
+            <router-link :to="{name: 'Register'}"><v-btn color="secondary" small>Create Student</v-btn></router-link>
+            <v-simple-table>
+                <template v-slot:default>
+                    <thead>
+                        <tr >
+                            <th class="text-left">RA(Registro do Aluno)</th>
+                            <th class="text-left">Name</th>
+                            <th class="text-left">Email</th>
+                            <th class="text-left">CPF</th>
+                            <th class="text-left">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="student in students" :key="student.ra">
+                            <td>{{student.ra}}</td>
+                            <td>{{student.name}}</td>
+                            <td>{{student.email }}</td>
+                            <td>{{student.cpf}}</td>
+                            <td>
+                                <router-link :to="{name: 'Edit', params: {id: student.ra}}"><v-btn color="warning" small>Edit</v-btn></router-link> |
+                                <v-btn color="error" small @click="deleteUser(student.ra)">Delete</v-btn>
+                            </td>
+                        </tr>
+                    </tbody>
+                </template>
+            </v-simple-table>
+        </v-container>
     </div>
 </template>
 

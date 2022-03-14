@@ -1,20 +1,22 @@
 <template>
     <div>
-        <div v-if="error != undefined">
-            <p>{{error}}</p>
-        </div>
-        <h2>Student Register</h2>
-        <hr>
-        <v-text-field v-model="ra" label="RA" ></v-text-field>
-        <v-text-field v-model="name" label="Student Name" clearable ></v-text-field>
-        <v-text-field v-model="email" label="Student Email" clearable ></v-text-field>
-        <v-text-field v-model="cpf" label="Student CPF"></v-text-field>
-        <v-btn color='secondary' small @click="register">Create Student</v-btn>
+        <v-container fluid>
+            <div v-if="error != undefined">
+                <p>{{error}}</p>
+            </div>
+            <h2>Student Register</h2>
+            <hr>
+            <v-text-field v-model="ra" label="RA" clearable ></v-text-field>
+            <v-text-field v-model="name" label="Student Name" clearable ></v-text-field>
+            <v-text-field v-model="email" label="Student Email" clearable ></v-text-field>
+            <v-text-field v-model="cpf" label="Student CPF" clearable></v-text-field>
+            <v-btn color='secondary' small @click="register">Create Student</v-btn> |
+            <router-link :to="{name: 'User'}"><v-btn color="secondary" small>Cancel</v-btn></router-link>
+        </v-container>
     </div>
 </template>
 
 <script>
-//import RegisterComp from '../components/RegisterComp.vue'
 import axios from 'axios';
 export default {
     name: 'RegisterView',
@@ -37,16 +39,13 @@ export default {
             }).then(res => {
                 console.log(res);
                 this.$router.push({name: "User"});
+                alert("Student created successfully");
             }).catch(err => {
                 let errMsg = err.response.data.title;
                 this.error = `Error: ${errMsg}`;
             })
         }
     }
-
-    /*components: {
-        RegisterComp,
-    },*/
 }
 </script>
 
