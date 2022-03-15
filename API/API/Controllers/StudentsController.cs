@@ -61,6 +61,10 @@ namespace API.Controllers
                 {
                     return BadRequest();
                 }
+
+                bool emailValidator = student.Email.Contains("@hotmail.com") || student.Email.Contains("@outlook.com") || student.Email.Contains("@gmail.com");
+                if (emailValidator == false) { return BadRequest("Invalid email"); }
+
                 if (student.Name is "" or null)
                 {
                     return BadRequest();
@@ -91,22 +95,38 @@ namespace API.Controllers
             _context.Student.Add(student);
             try
             {
-                if (student.Email is "" or null)
+                if (StudentExists(student.RA))
                 {
-                    return BadRequest();
+                    return BadRequest("Student already registered in this RA");
                 }
+                if (student.RA == 0 || student.RA > 9999999) //limit ra to 7 decimal places
+                {
+                    return BadRequest("Invalid RA");
+                }
+
                 if (student.Name is "" or null)
                 {
-                    return BadRequest();
+                    return BadRequest("Invalid Name");
                 }
-                if (student.CPF is "" or null)
+
+                bool emailValidator = student.Email.Contains("@hotmail.com") || student.Email.Contains("@outlook.com") || student.Email.Contains("@gmail.com");
+                if (emailValidator == false) { return BadRequest("Invalid email"); }
+
+                const int cpfMax = 14;
+                if(student.CPF.Length > cpfMax)
                 {
-                    return BadRequest();
+                    student.CPF = student.CPF.Substring(0, cpfMax);
                 }
-                if (student.RA == 0)
+
+                if (student.CPF is "" or null || student.CPF.Length < cpfMax)
                 {
-                    return BadRequest();
+                    return BadRequest("Invalid CPF");
                 }
+                if (StudentExistsByCPF(student.CPF))
+                {
+                    return BadRequest("Student already registered with that CPF");
+                }
+
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException)
@@ -144,5 +164,7 @@ namespace API.Controllers
         {
             return _context.Student.Any(e => e.RA == id);
         }
-    }
+
+        private bool StudentExistsByCPF(string cpf) { return _context.Student.Any(e => e.CPF == cpf); }
+    }     
 }
