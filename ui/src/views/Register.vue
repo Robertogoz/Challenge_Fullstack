@@ -7,7 +7,7 @@
             <h2>Student Register</h2><br>
             <v-text-field v-model="ra" label="RA" hint="12334554" clearable ></v-text-field>
             <v-text-field v-model="name" label="Student Name" clearable ></v-text-field>
-            <v-text-field v-model="email" label="Student Email" hint="email@email.com" clearable ></v-text-field>
+            <v-text-field v-model="email" label="Student Email" hint="email@gmail/hotmail/outlook.com" clearable ></v-text-field>
             <v-text-field v-model="cpf" label="Student CPF" hint="000.000.000-00" clearable></v-text-field><br>
             <v-btn color='secondary' small @click="register">Create Student</v-btn> |
             <router-link :to="{name: 'User'}"><v-btn color="secondary" small>Cancel</v-btn></router-link>
@@ -40,7 +40,7 @@ export default {
                 this.$router.push({name: "User"});
                 alert("Student created successfully");
             }).catch(err => {
-                let errMsg = err.response.data.title;
+                let errMsg = err.response.data;
                 this.error = `Error: ${errMsg}`;
             })
         }
