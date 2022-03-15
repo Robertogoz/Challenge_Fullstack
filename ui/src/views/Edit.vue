@@ -2,7 +2,7 @@
     <div>
         <v-container fluid>
             <div v-if="error != undefined">
-                <p>{{error}}</p>
+                <v-alert type="error">{{error}}</v-alert>
             </div>
             <h2>Student Edit</h2><br>
             <v-text-field v-model="ra" label="RA" disabled hint='12334554' ></v-text-field>
