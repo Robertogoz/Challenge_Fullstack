@@ -1,6 +1,9 @@
 <template>
     <div>
         <v-container fluid>
+            <div v-if="editSuccess != undefined">
+                <v-alert type="success">{{editSuccess}}</v-alert>
+            </div>
             <div v-if="error != undefined">
                 <v-alert type="error">{{error}}</v-alert>
             </div>
@@ -38,7 +41,8 @@ export default {
             name: "",
             email: "",
             cpf: "",
-            error: undefined
+            error: undefined,
+            editSuccess: undefined,
         }
     }, 
     methods: {
@@ -50,8 +54,8 @@ export default {
                 cpf: this.cpf
             }).then(res => {
                 console.log(res);
-                this.$router.push({name: "User"});
-                alert("Student edited successfully");
+                this.editSuccess = "User Edited Successfully";
+                setTimeout(() =>{this.$router.push({name: "User"})}, 1000);
             }).catch(err => {
                 let errMsg = err.response.data;
                 this.error = `Error: ${errMsg}`;
