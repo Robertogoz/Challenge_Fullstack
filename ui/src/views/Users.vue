@@ -56,7 +56,7 @@ import axios from 'axios';
 export default {
     name: 'UserViews',
     created() {
-        axios.get('https://localhost:7082/api/Students').then(res => {
+        axios.get('https://localhost:7082/Students').then(res => {
             this.students = res.data;
         }).catch(err => {
             console.log(err);
@@ -80,7 +80,7 @@ export default {
     },
     methods: {
         deleteUser() {
-            axios.delete('https://localhost:7082/api/Students/'+this.deleteUserId).then(res => {
+            axios.delete('https://localhost:7082/Students/'+this.deleteUserId).then(res => {
                 console.log(res);
                 this.students = this.students.filter(s => s.ra != this.deleteUserId);
                 this.dialog = false;

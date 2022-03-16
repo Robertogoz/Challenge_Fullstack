@@ -34,7 +34,7 @@ export default {
     }, 
     methods: {
         register() {
-            axios.post("https://localhost:7082/api/Students",{
+            axios.post("https://localhost:7082/Students",{
                 ra: Number(this.ra),
                 name: this.name,
                 email: this.email,

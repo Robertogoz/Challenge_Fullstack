@@ -24,7 +24,7 @@ import axios from 'axios';
 export default {
     name: 'EditView',
     created() {
-        axios.get("https://localhost:7082/api/Students/"+ this.$route.params.id).then(res => {
+        axios.get("https://localhost:7082/Students/"+ this.$route.params.id).then(res => {
             console.log(res);
             this.ra = res.data.ra;
             this.name = res.data.name;
@@ -47,7 +47,7 @@ export default {
     }, 
     methods: {
         update() {
-            axios.put("https://localhost:7082/api/Students/"+this.ra,{
+            axios.put("https://localhost:7082/Students/"+this.ra,{
                 ra: Number(this.ra),
                 name: this.name,
                 email: this.email,
