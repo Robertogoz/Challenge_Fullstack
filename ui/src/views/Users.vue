@@ -22,7 +22,7 @@
                             <td>{{student.cpf}}</td>
                             <td>
                                 <router-link :to="{name: 'Edit', params: {id: student.ra}}"><v-btn color="warning" small>Edit</v-btn></router-link> |
-                                <v-dialog v-model="dialog" max-width="290">
+                                <v-dialog v-model="dialog" max-width="290" :retain-focus="false">
                                     <template v-slot:activator="{ on, attrs }">
                                         <v-btn color="error" small v-bind="attrs" @click='saveRA(student.ra)' v-on="on">Delete</v-btn>
                                     </template>
