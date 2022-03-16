@@ -2,13 +2,13 @@
     <div>
         <v-container fluid>
             <div v-if="created != undefined">
-                <v-alert type="success">{{created}}</v-alert>
+                <v-alert dense type="success">{{created}}</v-alert>
             </div>
             <div v-if="error != undefined">
-                <v-alert type="error">{{error}}</v-alert>
+                <v-alert dense type="error">{{error}}</v-alert>
             </div>
             <h2>Student Register</h2><br>
-            <v-text-field v-model="ra" label="RA" hint="12334554" clearable ></v-text-field>
+            <v-text-field v-model="ra" label="RA" hint="1233455" clearable ></v-text-field>
             <v-text-field v-model="name" label="Student Name" clearable ></v-text-field>
             <v-text-field v-model="email" label="Student Email" hint="email@gmail/hotmail/outlook.com" clearable ></v-text-field>
             <v-text-field v-model="cpf" label="Student CPF" hint="000.000.000-00" clearable></v-text-field><br>

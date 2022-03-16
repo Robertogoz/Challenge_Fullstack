@@ -1,11 +1,11 @@
 <template>
     <div>
         <v-container fluid>
-            <div v-if="editSuccess != undefined">
-                <v-alert type="success">{{editSuccess}}</v-alert>
+            <div v-if="edited != undefined">
+                <v-alert dense type="success">{{edited}}</v-alert>
             </div>
             <div v-if="error != undefined">
-                <v-alert type="error">{{error}}</v-alert>
+                <v-alert dense type="error">{{error}}</v-alert>
             </div>
             <h2>Student Edit</h2><br>
             <v-text-field v-model="ra" label="RA" disabled hint='12334554' ></v-text-field>
@@ -42,7 +42,7 @@ export default {
             email: "",
             cpf: "",
             error: undefined,
-            editSuccess: undefined,
+            edited: undefined,
         }
     }, 
     methods: {
@@ -54,7 +54,7 @@ export default {
                 cpf: this.cpf
             }).then(res => {
                 console.log(res);
-                this.editSuccess = "User Edited Successfully";
+                this.edited = "User Edited Successfully";
                 setTimeout(() =>{this.$router.push({name: "User"})}, 1000);
             }).catch(err => {
                 let errMsg = err.response.data;
